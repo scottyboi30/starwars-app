@@ -2,6 +2,7 @@ import React from 'react';
 import { rest } from 'msw'
 import { setupServer } from 'msw/node'
 import { render, fireEvent, waitFor, screen } from '@testing-library/react'
+
 import Home from './Home';
 import ICharacter from '../models/character';
 
@@ -50,6 +51,22 @@ describe('Home', () => {
         it('Does not display the character after loading', async () => {
             await waitFor(() => expect(screen.getByTestId("loader")).toBeInTheDocument());
             await waitFor(() => expect(screen.getByText('No character found')).toBeInTheDocument());  
+        });
+    });
+
+    describe('When a error occurs getting a character', () => {
+        beforeAll(() => {
+            server.use(
+                rest.get('https://swapi.dev/*', (req, res, ctx) => {
+                  return res(ctx.status(500))
+                })
+              );
+            render(<Home />);
+            fireEvent.click(screen.getByTestId("search-button"));
+        });
+
+        it('Displays an error message', async () => {
+            await waitFor(() => expect(screen.getByText('An error occurred, please try again')).toBeInTheDocument());  
         });
     });
 });

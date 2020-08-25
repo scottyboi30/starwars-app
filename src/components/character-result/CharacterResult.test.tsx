@@ -1,5 +1,6 @@
 import React from "react";
-import { render, screen, wait, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
+
 import CharacterResult from "./CharacterResult";
 import ICharacter from "../../models/character";
 
