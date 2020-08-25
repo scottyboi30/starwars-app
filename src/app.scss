@@ -1,0 +1,18 @@
+.app {
+  font-size: 1.6rem;
+  
+  &__header {
+    padding: 1.5rem 0;
+    color: #FFE81F;
+    background-color: #4986E8;
+    margin-bottom: 2rem;
+    text-align: center;
+    background-image: url('./star-wars-background.png');
+    background-size: contain;
+    font-weight: 900;
+  }
+
+  &__main{
+    padding: 0 .5rem;
+  }
+}
